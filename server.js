@@ -6,10 +6,12 @@ const authRoutes = require('./routes/auth');
 const availabilityRoutes = require('./routes/availability');
 const appointmentRoutes = require('./routes/appointments');
 const { notFound, errorHandler } = require('./middleware/errorHandler');
+const { apiLimiter } = require('./middleware/rateLimiter');
 
 const app = express();
 
 app.use(express.json());
+app.use('/api', apiLimiter);
 
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });

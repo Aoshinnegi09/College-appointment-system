@@ -135,10 +135,6 @@ const cancelAppointment = async (req, res) => {
 };
 
 const listAppointments = async (req, res) => {
-  if (req.user.role !== 'professor') {
-    return res.status(403).json({ message: 'Forbidden' });
-  }
-
   const appointments = await Appointment.find({ professorId: req.user._id })
     .populate('studentId', 'name email role')
     .populate('professorId', 'name email role')

@@ -14,8 +14,8 @@ const router = express.Router();
 router.get('/available', getAvailableAppointments);
 router.post('/', auth, authorizeRoles('student'), bookAppointment);
 router.get('/my-appointments', auth, getMyAppointments);
+router.get('/', auth, authorizeRoles('professor'), listAppointments);
 router.get('/:appointmentId', auth, getAppointmentById);
 router.delete('/:appointmentId', auth, cancelAppointment);
-router.get('/', auth, authorizeRoles('professor'), listAppointments);
 
 module.exports = router;
